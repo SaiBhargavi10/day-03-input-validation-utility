@@ -103,12 +103,8 @@ day-03-input-validation-utility/
 Run the application:
 
 bash
-Copy code
 python input_validator.py
 Open browser and visit:
-
-cpp
-Copy code
 http://127.0.0.1:5000/
 
 📌 Credits
