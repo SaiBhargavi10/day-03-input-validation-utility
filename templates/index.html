@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Input Validation Utility</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% if messages and not messages.success %}
+<div class="error-state" id="errorState">
+
+  <div class="web-line"></div>
+  <div class="fail-badge">❌ Validation Failed</div>
+
+  <div class="modal-overlay" id="errorModal">
+    <div class="modal">
+      <h3>Invalid Input</h3>
+      <p>Please correct the highlighted fields.</p>
+      <button onclick="closeModal()">OK</button>
+    </div>
+  </div>
+
+</div>
+{% endif %}
+
+
+<div class="card {% if messages and not messages.success %}impact{% endif %}">
+  <h2>🕷️ Input Validation Utility</h2>
+
+  <form method="POST" id="validatorForm">
+    <input type="text" name="email" placeholder="Email"
+           class="{% if messages.email and not messages.email[0] %}invalid{% endif %}">
+    {% if messages.email %}
+      <p class="{{ 'success' if messages.email[0] else 'error' }}">
+        {{ messages.email[1] }}
+      </p>
+    {% endif %}
+
+    <input type="password" name="password" placeholder="Password"
+           class="{% if messages.password and not messages.password[0] %}invalid{% endif %}">
+    {% if messages.password %}
+      <p class="{{ 'success' if messages.password[0] else 'error' }}">
+        {{ messages.password[1] }}
+      </p>
+    {% endif %}
+
+    <input type="text" name="age" placeholder="Age"
+           class="{% if messages.age and not messages.age[0] %}invalid{% endif %}">
+    {% if messages.age %}
+      <p class="{{ 'success' if messages.age[0] else 'error' }}">
+        {{ messages.age[1] }}
+      </p>
+    {% endif %}
+
+    <button type="submit">Validate</button>
+  </form>
+
+  {% if messages.success %}
+    <p class="success">{{ messages.success }}</p>
+  {% else %}
+    {% if messages %}
+      <div class="fail-badge">❌ Validation Failed</div>
+      <div class="web-line"></div>
+      <div class="screen-flash"></div>
+    {% endif %}
+  {% endif %}
+</div>
+
+<script src="{{ url_for('static', filename='animations.js') }}"></script>
+</body>
+</html>
